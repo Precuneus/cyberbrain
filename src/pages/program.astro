@@ -14,11 +14,11 @@
     <div class="container">
       <!-- Header -->
       <header>
-        <nav class="header-nav">
+        <div class="header-row">
           <a href="/brain-week/" class="nav-link nav-left">← Strona Główna</a>
+          <h1>Program</h1>
           <a href="/brain-week/prelegenci" class="nav-link nav-right">Prelegenci →</a>
-        </nav>
-        <h1>Program</h1>
+        </div>
         <p class="subtitle">9-13 marca 2026 • Białystok</p>
       </header>
       
@@ -221,19 +221,29 @@
         margin-bottom: 3rem;
       }
 
-      .header-nav {
+      .header-row {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 2rem;
+        align-items: center;
+        margin-bottom: 0.5rem;
       }
 
       .nav-link {
         color: #64748b;
         text-decoration: none;
-        font-size: 0.9rem;
+        font-size: 1.1rem;
         letter-spacing: 0.05em;
         transition: color 0.3s ease;
         padding: 0.5rem 0;
+        min-width: 150px;
+      }
+
+      .nav-left {
+        text-align: left;
+      }
+
+      .nav-right {
+        text-align: right;
       }
 
       .nav-link:hover {
@@ -426,8 +436,18 @@
           padding: 1rem;
         }
 
+        .header-row {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
         .nav-link {
-          font-size: 0.8rem;
+          font-size: 0.95rem;
+          min-width: auto;
+        }
+
+        .nav-left, .nav-right {
+          text-align: center;
         }
 
         .event-info {
