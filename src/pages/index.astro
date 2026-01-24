@@ -1,11 +1,263 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Brain Week 2026 - Landing Page
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Tydzień Mózgu 2026 - Uniwersytet w Białymstoku, 9-13 marca" />
+    <title>Tydzień Mózgu 2026 | UwB</title>
+  </head>
+  <body>
+    <div class="fog-layer"></div>
+    <div class="fog-layer fog-2"></div>
+    
+    <main>
+      <div class="brain-container">
+        <svg class="brain" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stylized brain silhouette -->
+          <path d="M50 10 
+                   C30 10 20 25 20 40 
+                   C20 45 22 50 18 55 
+                   C14 60 15 70 22 75 
+                   C28 80 35 82 40 85 
+                   C45 88 48 90 50 90 
+                   C52 90 55 88 60 85 
+                   C65 82 72 80 78 75 
+                   C85 70 86 60 82 55 
+                   C78 50 80 45 80 40 
+                   C80 25 70 10 50 10Z" 
+                fill="none" 
+                stroke="url(#brainGradient)" 
+                stroke-width="0.5"
+                class="brain-outline"/>
+          <!-- Brain folds suggestion -->
+          <path d="M35 30 C40 35 45 32 50 35 C55 32 60 35 65 30" 
+                fill="none" stroke="url(#brainGradient)" stroke-width="0.3" class="brain-detail"/>
+          <path d="M30 45 C38 48 45 44 50 48 C55 44 62 48 70 45" 
+                fill="none" stroke="url(#brainGradient)" stroke-width="0.3" class="brain-detail"/>
+          <path d="M32 60 C40 63 48 58 50 62 C52 58 60 63 68 60" 
+                fill="none" stroke="url(#brainGradient)" stroke-width="0.3" class="brain-detail"/>
+          <defs>
+            <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8b5cf6" />
+              <stop offset="50%" stop-color="#a78bfa" />
+              <stop offset="100%" stop-color="#c4b5fd" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="content">
+        <h1>Tydzień Mózgu</h1>
+        <p class="year">2026</p>
+        <p class="dates">9–13 marca</p>
+        <p class="location">Uniwersytet w Białymstoku</p>
+        
+        <div class="cta">
+          <a href="#program" class="button">Program</a>
+          <a href="#prelegenci" class="button button-secondary">Prelegenci</a>
+        </div>
+      </div>
+    </main>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        background: linear-gradient(180deg, 
+          #0a0a0f 0%, 
+          #0d0d1a 30%,
+          #111128 60%,
+          #0a0a0f 100%
+        );
+        background-attachment: fixed;
+        color: #e2e8f0;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      /* Fog layers */
+      .fog-layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: radial-gradient(ellipse at 50% 80%, 
+          rgba(139, 92, 246, 0.03) 0%, 
+          transparent 50%
+        );
+        animation: fog-drift 20s ease-in-out infinite;
+      }
+
+      .fog-2 {
+        background: radial-gradient(ellipse at 30% 60%, 
+          rgba(167, 139, 250, 0.02) 0%, 
+          transparent 40%
+        );
+        animation: fog-drift-2 25s ease-in-out infinite;
+      }
+
+      @keyframes fog-drift {
+        0%, 100% { transform: translateX(0) translateY(0); opacity: 1; }
+        50% { transform: translateX(30px) translateY(-20px); opacity: 0.7; }
+      }
+
+      @keyframes fog-drift-2 {
+        0%, 100% { transform: translateX(0) translateY(0); opacity: 0.8; }
+        50% { transform: translateX(-40px) translateY(10px); opacity: 1; }
+      }
+
+      main {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .brain-container {
+        width: 280px;
+        height: 280px;
+        margin-bottom: 2rem;
+        animation: emerge 2s ease-out forwards;
+        opacity: 0;
+        filter: blur(20px);
+      }
+
+      @keyframes emerge {
+        0% {
+          opacity: 0;
+          filter: blur(20px);
+          transform: scale(0.8) translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          filter: blur(0);
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .brain {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.3));
+      }
+
+      .brain-outline {
+        animation: pulse-glow 4s ease-in-out infinite;
+      }
+
+      .brain-detail {
+        opacity: 0.6;
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% { filter: drop-shadow(0 0 5px rgba(139, 92, 246, 0.5)); }
+        50% { filter: drop-shadow(0 0 15px rgba(167, 139, 250, 0.8)); }
+      }
+
+      .content {
+        text-align: center;
+        animation: fade-up 2s ease-out 0.5s forwards;
+        opacity: 0;
+      }
+
+      @keyframes fade-up {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 8vw, 4.5rem);
+        font-weight: 300;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        background: linear-gradient(135deg, #e2e8f0 0%, #a78bfa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .year {
+        font-size: clamp(3rem, 10vw, 6rem);
+        font-weight: 100;
+        color: #8b5cf6;
+        letter-spacing: 0.3em;
+        margin: -0.5rem 0 1.5rem;
+      }
+
+      .dates {
+        font-size: 1.25rem;
+        color: #94a3b8;
+        letter-spacing: 0.2em;
+        margin-bottom: 0.5rem;
+      }
+
+      .location {
+        font-size: 1rem;
+        color: #64748b;
+        letter-spacing: 0.1em;
+        margin-bottom: 2.5rem;
+      }
+
+      .cta {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        padding: 0.875rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        color: white;
+        border: 1px solid transparent;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+      }
+
+      .button-secondary {
+        background: transparent;
+        border: 1px solid #8b5cf6;
+        color: #a78bfa;
+      }
+
+      .button-secondary:hover {
+        background: rgba(139, 92, 246, 0.1);
+      }
+    </style>
+  </body>
+</html>
