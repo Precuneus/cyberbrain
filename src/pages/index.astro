@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="Brain Week 2026 - Uniwersytet w Białymstoku, 9-13 marca. Biologiczne i sztuczne sieci neuronowe." />
     <title>Brain Week 2026 | UwB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
   </head>
   <body>
     <!-- Network canvas -->
@@ -34,6 +37,29 @@
     </main>
 
     <style>
+      :root {
+        /* === PALETTE === */
+        --bg-dark: #18181a;
+        --bg-mid: #1a1a1f;
+        --bg-deep: #1c1c24;
+        
+        --text-light: #efdee8;
+        --text-mid: #dddddd;
+        --text-dim: #919598;
+        
+        --accent-violet: #6e27e1;
+        --accent-pink: #f287c8;
+        --accent-cyan: #40d0d5;
+        --accent-grad-start: #0900d6;
+        --accent-grad-end: #ff8cd1;
+        
+        /* === FONTS === */
+        /* Replace 'Orbitron' with 'RQND Pro' when self-hosted */
+        --font-title: 'Orbitron', sans-serif;
+        --font-body: 'Poppins', sans-serif;
+        --font-mono: 'Roboto Mono', monospace;
+      }
+
       * {
         margin: 0;
         padding: 0;
@@ -47,14 +73,14 @@
 
       body {
         background: linear-gradient(180deg, 
-          #0a0a0f 0%, 
-          #0d0d1a 30%,
-          #111128 60%,
-          #0a0a0f 100%
+          var(--bg-dark) 0%, 
+          var(--bg-mid) 30%,
+          var(--bg-deep) 60%,
+          var(--bg-dark) 100%
         );
         background-attachment: fixed;
-        color: #e2e8f0;
-        font-family: 'Segoe UI', system-ui, sans-serif;
+        color: var(--text-light);
+        font-family: var(--font-body);
         min-height: 100vh;
         position: relative;
       }
@@ -95,7 +121,7 @@
         height: auto;
         mix-blend-mode: screen;
         opacity: 0.2;
-        filter: hue-rotate(240deg) saturate(0.7) brightness(1.2);
+        filter: hue-rotate(260deg) saturate(0.8) brightness(1.2);
         mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 70%);
         -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 70%);
       }
@@ -113,11 +139,13 @@
       }
 
       h1 {
+        font-family: var(--font-title);
         font-size: clamp(2.5rem, 8vw, 5rem);
-        font-weight: 300;
-        letter-spacing: 0.2em;
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 1.5;
         text-transform: uppercase;
-        background: linear-gradient(135deg, #e2e8f0 0%, #a78bfa 100%);
+        background: linear-gradient(135deg, var(--text-light) 0%, var(--accent-pink) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -126,9 +154,10 @@
       }
 
       .year {
+        font-family: var(--font-title);
         font-size: clamp(3rem, 10vw, 6rem);
-        font-weight: 100;
-        color: #8b5cf6;
+        font-weight: 400;
+        color: var(--accent-violet);
         letter-spacing: 0.4em;
         margin: -0.5rem 0 0.8rem;
         padding-left: 0.4em;
@@ -137,8 +166,10 @@
       }
 
       .subtitle {
+        font-family: var(--font-body);
         font-size: 0.95rem;
-        color: #ffffff;
+        font-weight: 300;
+        color: var(--text-light);
         letter-spacing: 0.2em;
         margin-bottom: 1.5rem;
         opacity: 0;
@@ -146,16 +177,20 @@
       }
 
       .dates {
+        font-family: var(--font-mono);
         font-size: 1.2rem;
-        color: #ffffff;
+        font-weight: 500;
+        color: var(--accent-cyan);
         letter-spacing: 0.2em;
         opacity: 0;
         animation: fadeUp 1.5s ease-out 1.4s forwards;
       }
 
       .location {
+        font-family: var(--font-body);
         font-size: 1.3rem;
-        color: #ffffff;
+        font-weight: 600;
+        color: var(--text-light);
         letter-spacing: 0.2em;
         margin-top: 0.8rem;
         margin-bottom: 2.5rem;
@@ -184,31 +219,33 @@
       }
 
       .button {
+        font-family: var(--font-body);
         padding: 1rem 2.5rem;
         border-radius: 4px;
         text-decoration: none;
         font-size: 0.85rem;
+        font-weight: 600;
         letter-spacing: 0.15em;
         text-transform: uppercase;
         transition: all 0.3s ease;
-        background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-grad-start) 100%);
         color: white;
         border: 1px solid transparent;
       }
 
       .button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        box-shadow: 0 10px 30px rgba(110, 39, 225, 0.3);
       }
 
       .button-secondary {
         background: transparent;
-        border: 1px solid #8b5cf6;
-        color: #a78bfa;
+        border: 1px solid var(--accent-violet);
+        color: var(--accent-pink);
       }
 
       .button-secondary:hover {
-        background: rgba(139, 92, 246, 0.1);
+        background: rgba(110, 39, 225, 0.1);
       }
     </style>
 
@@ -227,10 +264,25 @@
       resize();
       window.addEventListener('resize', resize);
       
+      // Palette colors as RGB for canvas
+      const COLORS = {
+        violet: { r: 110, g: 39, b: 225 },
+        pink:   { r: 242, g: 135, b: 200 },
+        cyan:   { r: 64,  g: 208, b: 213 },
+      };
+      
       // Pareto distribution
       function pareto(xMin, alpha) {
         const u = Math.random();
         return xMin / Math.pow(u, 1 / alpha);
+      }
+      
+      // Pick a random palette color for a node
+      function pickColor() {
+        const r = Math.random();
+        if (r < 0.55) return COLORS.violet;
+        if (r < 0.80) return COLORS.cyan;
+        return COLORS.pink;
       }
       
       // Node class
@@ -244,13 +296,13 @@
           this.x = Math.random() * canvas.width;
           this.y = Math.random() * canvas.height;
           
+          this.color = pickColor();
           this.radius = Math.random() * 1.5 + 1;
           this.baseOpacity = Math.random() * 0.3 + 0.5;
           this.opacity = 0;
           
-          // Variable base speed - some slow, some fast, few very fast
+          // Variable base speed
           if (Math.random() < 0.05) {
-            // 5% are super fast (3x-4x normal max)
             this.baseSpeed = 1.2 + Math.random() * 0.4;
           } else {
             this.baseSpeed = 0.05 + Math.random() * 0.35;
@@ -258,7 +310,6 @@
           this.currentSpeed = this.baseSpeed;
           this.targetSpeed = this.baseSpeed;
           
-          // Random initial direction
           const angle = Math.random() * Math.PI * 2;
           this.vx = Math.cos(angle) * this.currentSpeed;
           this.vy = Math.sin(angle) * this.currentSpeed;
@@ -280,7 +331,6 @@
         }
         
         update(nodes) {
-          // Find max speed among connected nodes
           if (this.connectedNodes.size > 0) {
             let maxSpeedInGraph = this.baseSpeed;
             
@@ -291,7 +341,6 @@
             }
             
             this.targetSpeed = maxSpeedInGraph;
-            // Smooth acceleration (derivative-based)
             this.currentSpeed += (this.targetSpeed - this.currentSpeed) * 0.02;
           }
           
@@ -346,7 +395,6 @@
           this.x += this.vx;
           this.y += this.vy;
           
-          // Maintain current speed
           const speed = Math.hypot(this.vx, this.vy);
           if (speed > 0.01) {
             const targetMagnitude = this.seeksCenter ? this.currentSpeed : this.baseSpeed;
@@ -382,15 +430,16 @@
           
           const pulse = Math.sin(this.pulsePhase) * 0.15 + 0.9;
           const r = this.radius * pulse;
+          const c = this.color;
           
           ctx.beginPath();
           ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(180, 160, 255, ${this.opacity * pulse})`;
+          ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${this.opacity * pulse})`;
           ctx.fill();
           
           ctx.beginPath();
           ctx.arc(this.x, this.y, r * 3, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(139, 92, 246, ${this.opacity * 0.12})`;
+          ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${this.opacity * 0.12})`;
           ctx.fill();
         }
       }
@@ -414,14 +463,15 @@
           const x = this.nodeA.x + (this.nodeB.x - this.nodeA.x) * this.pos;
           const y = this.nodeA.y + (this.nodeB.y - this.nodeA.y) * this.pos;
           
+          // Signals in pink
           ctx.beginPath();
           ctx.arc(x, y, 2, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(220, 200, 255, ${opacity * 0.8})`;
+          ctx.fillStyle = `rgba(242, 135, 200, ${opacity * 0.8})`;
           ctx.fill();
           
           ctx.beginPath();
           ctx.arc(x, y, 5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(180, 160, 255, ${opacity * 0.25})`;
+          ctx.fillStyle = `rgba(242, 135, 200, ${opacity * 0.25})`;
           ctx.fill();
         }
       }
@@ -451,7 +501,6 @@
             
             if (dist < maxDist) {
               const strength = 1 - (dist / maxDist);
-              // Ensure long connections are still visible
               const baseOpacity = 0.08;
               const opacity = (baseOpacity + strength * 0.45) * Math.min(a.opacity, b.opacity);
               
@@ -459,10 +508,15 @@
                 a.connectTo(b);
                 b.connectTo(a);
                 
+                // Connection line blends both node colors
+                const mr = (a.color.r + b.color.r) / 2;
+                const mg = (a.color.g + b.color.g) / 2;
+                const mb = (a.color.b + b.color.b) / 2;
+                
                 ctx.beginPath();
                 ctx.moveTo(a.x, a.y);
                 ctx.lineTo(b.x, b.y);
-                ctx.strokeStyle = `rgba(139, 92, 246, ${opacity})`;
+                ctx.strokeStyle = `rgba(${mr}, ${mg}, ${mb}, ${opacity})`;
                 ctx.lineWidth = 0.5 + strength * 1.5;
                 ctx.stroke();
                 
