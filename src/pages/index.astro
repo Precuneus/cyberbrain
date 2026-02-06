@@ -1,5 +1,5 @@
 ---
-// Brain Week 2026 - Landing Page
+// CyberWeek 2026 - Landing Page
 ---
 
 <html lang="pl">
@@ -7,8 +7,8 @@
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/brain-week/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Brain Week 2026 - Uniwersytet w Białymstoku, 9-13 marca. Biologiczne i sztuczne sieci neuronowe." />
-    <title>Brain Week 2026 | UwB</title>
+    <meta name="description" content="CyberWeek 2026 - Uniwersytet w Białymstoku, 9-13 marca. Biologiczne i sztuczne sieci neuronowe." />
+    <title>CyberWeek 2026 | UwB</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -24,16 +24,54 @@
     
     <!-- Content -->
     <main>
-      <h1>Brain Week</h1>
-      <p class="year">2026</p>
-      <p class="subtitle">Dowiedz Się Jak Myśli Mózg</p>
-      <p class="dates">9–13 marca</p>
-      <p class="location">BIAŁYSTOK</p>
-      
-      <div class="cta">
-        <a href="/brain-week/program" class="button">Program</a>
-        <a href="/brain-week/prelegenci" class="button button-secondary">Prelegenci</a>
-      </div>
+      <section class="hero">
+        <h1>CyberWeek</h1>
+        <p class="year">2026</p>
+        <p class="subtitle">Dowiedz Się Jak Myśli Mózg</p>
+        <p class="dates">9–13 marca</p>
+        <p class="location">BIAŁYSTOK</p>
+        
+        <div class="cta">
+          <a href="/brain-week/program" class="button">Program</a>
+          <a href="/brain-week/prelegenci" class="button button-secondary">Prelegenci</a>
+        </div>
+      </section>
+
+      <section class="about">
+        <h2>O wydarzeniu</h2>
+        <p class="about-text">
+          CyberWeek to białostocka odsłona międzynarodowego <strong>Brain Awareness Week</strong> – 
+          ogólnoświatowej inicjatywy popularyzującej wiedzę o mózgu i układzie nerwowym. 
+          Przez pięć dni naukowcy, praktycy i entuzjaści spotykają się, by rozmawiać o tym, 
+          jak działa nasz mózg – i jak działają jego sztuczne odpowiedniki.
+        </p>
+        <p class="about-text">
+          Wykłady, warsztaty i dyskusje prowadzone przez badaczy z Uniwersytetu w Białymstoku 
+          i zaproszonych gości. Tematyka: od neurobiologii przez kognitywistykę po sztuczną inteligencję.
+        </p>
+      </section>
+
+      <section class="faq">
+        <h2>FAQ</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3>Czy wstęp jest płatny?</h3>
+            <p>Nie. Wszystkie wydarzenia CyberWeek są <strong>bezpłatne</strong> i otwarte dla każdego.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Czy muszę się rejestrować?</h3>
+            <p>Nie ma obowiązkowej rejestracji. Przyjdź i weź udział.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Dla kogo jest to wydarzenie?</h3>
+            <p>Dla wszystkich zainteresowanych – studentów, uczniów, profesjonalistów i hobbystów. Nie wymagamy specjalistycznej wiedzy.</p>
+          </div>
+          <div class="faq-item">
+            <h3>Gdzie odbywają się wydarzenia?</h3>
+            <p>Na kampusie Uniwersytetu w Białymstoku. Szczegóły lokalizacji w <a href="/brain-week/program">programie</a>.</p>
+          </div>
+        </div>
+      </section>
     </main>
 
     <style>
@@ -129,12 +167,18 @@
       main {
         position: relative;
         z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+      }
+
+      .hero {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 2rem;
         text-align: center;
       }
 
@@ -241,11 +285,78 @@
       .button-secondary {
         background: transparent;
         border: 1px solid var(--accent-violet);
-        color: var(--accent-pink);
+        color: white;
       }
 
       .button-secondary:hover {
         background: rgba(110, 39, 225, 0.1);
+      }
+
+      /* About & FAQ sections */
+      .about, .faq {
+        max-width: 800px;
+        width: 100%;
+        padding: 4rem 2rem;
+        text-align: center;
+      }
+
+      .about h2, .faq h2 {
+        font-family: var(--font-title);
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: var(--accent-cyan);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+      }
+
+      .about-text {
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.8;
+        color: var(--text-mid);
+        margin-bottom: 1.5rem;
+      }
+
+      .about-text strong {
+        color: var(--text-light);
+        font-weight: 600;
+      }
+
+      .faq-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        text-align: left;
+      }
+
+      .faq-item h3 {
+        font-family: var(--font-body);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--accent-pink);
+        margin-bottom: 0.5rem;
+      }
+
+      .faq-item p {
+        font-size: 0.9rem;
+        font-weight: 300;
+        line-height: 1.6;
+        color: var(--text-dim);
+      }
+
+      .faq-item p strong {
+        color: var(--text-light);
+        font-weight: 600;
+      }
+
+      .faq-item a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+      }
+
+      .faq-item a:hover {
+        text-decoration: underline;
       }
     </style>
 
@@ -261,31 +372,29 @@
         centerX = canvas.width / 2;
         centerY = canvas.height / 2;
       }
+      
       resize();
       window.addEventListener('resize', resize);
       
-      // Palette colors as RGB for canvas
-      const COLORS = {
-        violet: { r: 110, g: 39, b: 225 },
-        pink:   { r: 242, g: 135, b: 200 },
-        cyan:   { r: 64,  g: 208, b: 213 },
-      };
-      
-      // Pareto distribution
-      function pareto(xMin, alpha) {
+      function pareto(min, alpha) {
         const u = Math.random();
-        return xMin / Math.pow(u, 1 / alpha);
+        return min / Math.pow(u, 1 / alpha);
       }
       
-      // Pick a random palette color for a node
+      // Three node colors
+      const nodeColors = [
+        { r: 110, g: 39, b: 225 },   // violet
+        { r: 64, g: 208, b: 213 },   // cyan
+        { r: 242, g: 135, b: 200 }   // pink
+      ];
+      
       function pickColor() {
-        const r = Math.random();
-        if (r < 0.55) return COLORS.violet;
-        if (r < 0.80) return COLORS.cyan;
-        return COLORS.pink;
+        const rand = Math.random();
+        if (rand < 0.55) return nodeColors[0];      // 55% violet
+        if (rand < 0.80) return nodeColors[1];      // 25% cyan
+        return nodeColors[2];                        // 20% pink
       }
       
-      // Node class
       class Node {
         constructor() {
           this.connectedNodes = new Set();
@@ -295,7 +404,6 @@
         spawn() {
           this.x = Math.random() * canvas.width;
           this.y = Math.random() * canvas.height;
-          
           this.color = pickColor();
           this.radius = Math.random() * 1.5 + 1;
           this.baseOpacity = Math.random() * 0.3 + 0.5;
