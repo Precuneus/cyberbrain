@@ -17,8 +17,9 @@
   <body>
     <canvas id="network"></canvas>
     
-    <div class="brain-container">
+    <div class="brain-container" id="brainToggle" role="button" tabindex="0" aria-label="Kliknij, aby uruchomić animację sieci neuronowej">
       <img src="/brain-week/brain-lateral.png" alt="" class="brain-image" />
+      <span class="brain-hint" id="brainHint">kliknij</span>
     </div>
     
     <main>
@@ -91,7 +92,7 @@
         transform: translate(-50%, -50%);
         width: min(75vw, 550px);
         z-index: 2;
-        pointer-events: none;
+        cursor: pointer;
         animation: brainFadeIn 3s ease-out forwards;
       }
 
@@ -108,6 +109,55 @@
         filter: hue-rotate(260deg) saturate(0.8) brightness(1.2);
         mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 70%);
         -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 70%);
+        transition: opacity 1.2s ease;
+      }
+
+      .brain-image.pulse {
+        animation: brainPulse 4s ease-in-out infinite;
+      }
+
+      @keyframes brainPulse {
+        0%, 100% { opacity: 0.2; }
+        50% { opacity: 0.28; }
+      }
+
+      .brain-image.active {
+        opacity: 0.3;
+        animation: none;
+      }
+
+      .brain-hint {
+        position: absolute;
+        bottom: 12%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent-cyan);
+        opacity: 0;
+        animation: hintAppear 1.5s ease-out 3.5s forwards;
+        pointer-events: none;
+      }
+
+      @keyframes hintAppear {
+        0% { opacity: 0; transform: translateX(-50%) translateY(5px); }
+        100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }
+      }
+
+      .brain-hint.hidden {
+        animation: hintDisappear 0.5s ease-out forwards;
+      }
+
+      @keyframes hintDisappear {
+        to { opacity: 0; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .brain-container { cursor: default; pointer-events: none; }
+        .brain-hint { display: none; }
+        .brain-image { animation: none !important; opacity: 0.2; }
       }
 
       main {
@@ -244,6 +294,11 @@
     </style>
 
     <script>
+      // === ANIMATION STATE ===
+      let animationActive = false;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // === CANVAS SETUP ===
       const canvas = document.getElementById('network');
       const ctx = canvas.getContext('2d');
       let centerX, centerY;
@@ -283,7 +338,7 @@
           this.color = pickColor();
           this.radius = Math.random() * 1.5 + 1;
           this.baseOpacity = Math.random() * 0.3 + 0.5;
-          this.opacity = 0;
+          this.opacity = animationActive ? 0 : this.baseOpacity;
           this.baseSpeed = Math.random() < 0.05 ? 1.2 + Math.random() * 0.4 : 0.05 + Math.random() * 0.35;
           this.currentSpeed = this.baseSpeed;
           this.targetSpeed = this.baseSpeed;
@@ -302,6 +357,12 @@
         connectTo(other) { this.connectedNodes.add(other); this.seeksCenter = true; }
         
         update(nodes) {
+          // When frozen: pulse only, no movement, no life decay
+          if (!animationActive) {
+            this.pulsePhase += this.pulseSpeed;
+            return;
+          }
+
           if (this.connectedNodes.size > 0) {
             let maxSpeedInGraph = this.baseSpeed;
             for (const other of this.connectedNodes) if (other.baseSpeed > maxSpeedInGraph) maxSpeedInGraph = other.baseSpeed;
@@ -419,31 +480,77 @@
               const strength = 1 - dist / maxDist;
               const opacity = (0.08 + strength * 0.45) * Math.min(a.opacity, b.opacity);
               if (opacity > 0.06) {
-                a.connectTo(b); b.connectTo(a);
+                if (animationActive) { a.connectTo(b); b.connectTo(a); }
                 ctx.beginPath();
                 ctx.moveTo(a.x, a.y);
                 ctx.lineTo(b.x, b.y);
                 ctx.strokeStyle = `rgba(${(a.color.r + b.color.r) / 2}, ${(a.color.g + b.color.g) / 2}, ${(a.color.b + b.color.b) / 2}, ${opacity})`;
                 ctx.lineWidth = 0.5 + strength * 1.5;
                 ctx.stroke();
-                if (Math.random() < 0.0005 * strength) signals.push(new Signal(a, b));
+                if (animationActive && Math.random() < 0.0005 * strength) signals.push(new Signal(a, b));
               }
             }
           }
         }
         
-        signals = signals.filter(s => {
-          const maxDist = Math.min(s.nodeA.maxConnDist, s.nodeB.maxConnDist);
-          const dist = Math.hypot(s.nodeA.x - s.nodeB.x, s.nodeA.y - s.nodeB.y);
-          if (dist > maxDist) return false;
-          const alive = s.update();
-          if (alive) s.draw((1 - dist / maxDist) * Math.min(s.nodeA.opacity, s.nodeB.opacity));
-          return alive;
-        });
+        if (animationActive) {
+          signals = signals.filter(s => {
+            const maxDist = Math.min(s.nodeA.maxConnDist, s.nodeB.maxConnDist);
+            const dist = Math.hypot(s.nodeA.x - s.nodeB.x, s.nodeA.y - s.nodeB.y);
+            if (dist > maxDist) return false;
+            const alive = s.update();
+            if (alive) s.draw((1 - dist / maxDist) * Math.min(s.nodeA.opacity, s.nodeB.opacity));
+            return alive;
+          });
+        }
         
         nodes.forEach(n => n.draw());
         requestAnimationFrame(animate);
       }
+
+      // === TOGGLE LOGIC ===
+      const brainToggle = document.getElementById('brainToggle');
+      const brainHint = document.getElementById('brainHint');
+      const brainImg = document.querySelector('.brain-image');
+
+      if (!prefersReducedMotion) {
+        brainImg.classList.add('pulse');
+      }
+
+      function toggleAnimation() {
+        if (prefersReducedMotion) return;
+        animationActive = !animationActive;
+
+        if (animationActive) {
+          brainImg.classList.remove('pulse');
+          brainImg.classList.add('active');
+          brainHint.classList.add('hidden');
+          // Nodes fade in via life cycle
+          nodes.forEach(n => { n.opacity = 0; n.life = n.maxLife; });
+        } else {
+          brainImg.classList.remove('active');
+          brainImg.classList.add('pulse');
+          signals = [];
+          // Reset graph state, restore static visibility
+          nodes.forEach(n => {
+            n.connectedNodes.clear();
+            n.seeksCenter = false;
+            n.opacity = n.baseOpacity;
+          });
+        }
+      }
+
+      if (!prefersReducedMotion) {
+        brainToggle.addEventListener('click', toggleAnimation);
+        brainToggle.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleAnimation();
+          }
+        });
+      }
+
+      // Start render loop (draws static frame even when paused)
       animate();
     </script>
   </body>
