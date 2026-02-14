@@ -137,6 +137,7 @@
 
       .hero {
         min-height: 85vh;
+        min-height: 85svh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -148,6 +149,17 @@
         font-size: clamp(2.5rem, 8vw, 5rem);
         opacity: 0;
         animation: fadeUp 1.5s ease-out 0.8s forwards;
+      }
+
+      .hero.animated h1,
+      .hero.animated .year,
+      .hero.animated .subtitle,
+      .hero.animated .dates,
+      .hero.animated .location,
+      .hero.animated .cta {
+        animation: none;
+        opacity: 1;
+        transform: none;
       }
 
       .year {
@@ -347,9 +359,6 @@
       const canvas = document.getElementById('network');
       const ctx = canvas.getContext('2d');
 
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
       const colors = [
         { r: 110, g: 39, b: 225 },
         { r: 64, g: 208, b: 213 },
@@ -363,60 +372,71 @@
         return colors[2];
       }
 
-      // Generate nodes
-      const nodeCount = Math.floor((canvas.width * canvas.height) / 10000);
-      const nodes = [];
-      for (let i = 0; i < nodeCount; i++) {
-        nodes.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          color: pickColor(),
-          radius: Math.random() * 1.5 + 1,
-          opacity: Math.random() * 0.3 + 0.4,
-          maxConnDist: 80 + Math.random() * 120
-        });
-      }
+      function drawNetwork() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw connections
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i], b = nodes[j];
-          const dist = Math.hypot(a.x - b.x, a.y - b.y);
-          const maxDist = Math.min(a.maxConnDist, b.maxConnDist);
-          if (dist < maxDist) {
-            const strength = 1 - dist / maxDist;
-            const opacity = (0.08 + strength * 0.4) * Math.min(a.opacity, b.opacity);
-            if (opacity > 0.04) {
-              ctx.beginPath();
-              ctx.moveTo(a.x, a.y);
-              ctx.lineTo(b.x, b.y);
-              ctx.strokeStyle = `rgba(${(a.color.r + b.color.r) / 2}, ${(a.color.g + b.color.g) / 2}, ${(a.color.b + b.color.b) / 2}, ${opacity})`;
-              ctx.lineWidth = 0.5 + strength * 1.2;
-              ctx.stroke();
+        const nodeCount = Math.floor((canvas.width * canvas.height) / 10000);
+        const nodes = [];
+        for (let i = 0; i < nodeCount; i++) {
+          nodes.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            color: pickColor(),
+            radius: Math.random() * 1.5 + 1,
+            opacity: Math.random() * 0.3 + 0.4,
+            maxConnDist: 80 + Math.random() * 120
+          });
+        }
+
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const a = nodes[i], b = nodes[j];
+            const dist = Math.hypot(a.x - b.x, a.y - b.y);
+            const maxDist = Math.min(a.maxConnDist, b.maxConnDist);
+            if (dist < maxDist) {
+              const strength = 1 - dist / maxDist;
+              const opacity = (0.08 + strength * 0.4) * Math.min(a.opacity, b.opacity);
+              if (opacity > 0.04) {
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.strokeStyle = `rgba(${(a.color.r + b.color.r) / 2}, ${(a.color.g + b.color.g) / 2}, ${(a.color.b + b.color.b) / 2}, ${opacity})`;
+                ctx.lineWidth = 0.5 + strength * 1.2;
+                ctx.stroke();
+              }
             }
           }
         }
+
+        for (const n of nodes) {
+          const c = n.color;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.radius * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${n.opacity * 0.12})`;
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${n.opacity})`;
+          ctx.fill();
+        }
       }
 
-      // Draw nodes
-      for (const n of nodes) {
-        const c = n.color;
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.radius * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${n.opacity * 0.12})`;
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${c.r}, ${c.g}, ${c.b}, ${n.opacity})`;
-        ctx.fill();
-      }
+      // Initial draw
+      drawNetwork();
 
-      // Redraw only on width change (avoids mobile address bar resize loop)
+      // Lock animations after they finish so they never replay
+      setTimeout(() => {
+        document.querySelector('.hero').classList.add('animated');
+      }, 3500);
+
+      // Redraw canvas on width change only (no page reload)
       let lastWidth = window.innerWidth;
       window.addEventListener('resize', () => {
         if (window.innerWidth !== lastWidth) {
           lastWidth = window.innerWidth;
-          location.reload();
+          drawNetwork();
         }
       });
     </script>
