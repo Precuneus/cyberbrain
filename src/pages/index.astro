@@ -80,6 +80,18 @@
           </div>
         </div>
       </section>
+
+      <footer class="patrons">
+        <p class="patrons-label">Patronat</p>
+        <div class="patrons-logos">
+          <a href="https://uwb.edu.pl" target="_blank" rel="noopener">
+            <img src="/logo-uwb.png" alt="Uniwersytet w Białymstoku" class="patron-logo" />
+          </a>
+          <a href="https://filozofia.uwb.edu.pl" target="_blank" rel="noopener">
+            <img src="/logo-wfik.png" alt="Wydział Filozofii i Kognitywistyki UwB" class="patron-logo" />
+          </a>
+        </div>
+      </footer>
     </main>
 
     <style>
@@ -291,6 +303,43 @@
         font-size: 1.1rem;
         font-weight: 500;
         color: var(--accent-cyan);
+      }
+
+      .patrons {
+        padding: 2rem 2rem 3rem;
+        text-align: center;
+      }
+
+      .patrons-label {
+        font-size: 0.75rem;
+        font-weight: 300;
+        color: var(--text-dim);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+      }
+
+      .patrons-logos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+      }
+
+      .patrons-logos a {
+        display: block;
+        opacity: 0.45;
+        transition: opacity 0.3s ease;
+      }
+
+      .patrons-logos a:hover {
+        opacity: 0.8;
+      }
+
+      .patron-logo {
+        height: 45px;
+        width: auto;
       }
     </style>
 
