@@ -37,6 +37,10 @@
               <span class="day-name">Poniedziałek</span>
               <span class="day-date">9.03</span>
             </div>
+            <div class="day-location">
+              <span class="loc-icon">&#9672;</span>
+              Wydział Filozofii i Kognitywistyki, Plac NZS 1
+            </div>
             <div class="talks">
               <div class="talk" data-expandable>
                 <div class="talk-header">
@@ -106,6 +110,10 @@
                 <div class="talk-header">
                   <div class="talk-info">
                     <div class="talk-time">11:30 - 13:30</div>
+                    <div class="talk-location">
+                      <span class="loc-icon">&#9672;</span>
+                      Wydział Fizyki, ul. Ciołkowskiego 1L
+                    </div>
                     <div class="talk-title">Neurozglejki i neuromorfy</div>
                     <a href="/prelegenci#duch" class="talk-speaker">prof. dr hab. Włodzisław Duch</a>
                   </div>
@@ -115,6 +123,18 @@
                   <p>Jest wiele mitów na temat mózgu i sztucznej inteligencji. Biologiczne mózgi mogą być najbardziej złożonymi strukturami w znanym Wszechświecie, ale to wynika z metabolizmu komórek, a nie wymogów inteligencji. Dość prymitywne programy komputerowe przekroczyły ludzkie możliwości w szachach, go i wielu innych grach. Duże modele językowe opanowały język w stopniu pozwalającym przejść test Turinga i teraz radzą sobie z tysiącami języków.</p>
                   <p>Wyobraźnia i kreatywność wielomodalnych modeli AI pozwala im tworzyć unikalną muzykę, obrazy i wideo. Największe modele językowe wchłonęły już prawie całą wiedzę ludzkości i zachowują się podobnie do nas: robią błędy, konfabulują, mają uprzedzenia, ale też mają intuicję i wyobraźnię, tworzą różne osobowości, które są odbiciem umysłu ich rozmówców.</p>
                   <p>Nasze ograniczenia poznawcze uniemożliwiają nam syntezę dostępnej obecnie wiedzy w wielu dziedzinach, w tym biologii i medycyny. Wkrótce wszystkie istotne osiągnięcia naukowe będą możliwe tylko przy współpracy z agentami opartymi na wielkich multimodalnych modelach językowych (LMM). Systemy zdolne do introspekcji stają się inteligentnymi cyfrowymi formami bytu. Czy jest jednak coś, co pozostanie unikalną cechą biologicznych neurozglejków, czego neuromorfy, systemy neuromorficzne, elektroniczne czy fotoniczne nie mogą mieć?</p>
+                </div>
+              </div>
+
+              <div class="talk tba">
+                <div class="talk-header">
+                  <div class="talk-info">
+                    <div class="talk-location">
+                      <span class="loc-icon">&#9672;</span>
+                      Wydział Filozofii i Kognitywistyki, Plac NZS 1
+                    </div>
+                    <div class="talk-title tba-text">Popołudnie &middot; wkrótce</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -303,6 +323,32 @@
         font-size: 0.85rem;
         color: var(--text-dim);
         font-weight: 400;
+      }
+
+      /* ── LOCATIONS ── */
+      .day-location,
+      .talk-location {
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        font-weight: 300;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .day-location {
+        padding: 0 1.5rem 0.5rem;
+        margin-top: -0.25rem;
+      }
+
+      .talk-location {
+        margin-bottom: 0.4rem;
+      }
+
+      .loc-icon {
+        color: var(--day-color, var(--accent-violet));
+        font-size: 0.6rem;
+        opacity: 0.7;
       }
 
       /* ── TALKS ── */
