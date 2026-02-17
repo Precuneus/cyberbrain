@@ -93,8 +93,7 @@ header {
 h1 {
   font-family: var(--font-title);
   font-size: clamp(2rem, 6vw, 3.5rem);
-  font-weight: 400;
-  letter-spacing: 0;
+  font-weight: 700;
   line-height: 1.5;
   text-transform: uppercase;
   background: linear-gradient(135deg, var(--text-light) 0%, var(--accent-pink) 100%);
@@ -116,7 +115,7 @@ h1 {
 .button {
   font-family: var(--font-body);
   padding: 1rem 2.5rem;
-  border-radius: 4px;
+  border-radius: 8px;
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 600;
@@ -134,13 +133,13 @@ h1 {
 }
 
 .button-secondary {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.45);
   border: 1px solid var(--accent-violet);
   color: white;
 }
 
 .button-secondary:hover {
-  background: rgba(110, 39, 225, 0.1);
+  background: rgba(110, 39, 225, 0.2);
 }
 
 /* === FOOTER === */
