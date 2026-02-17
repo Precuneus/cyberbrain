@@ -82,14 +82,23 @@
       </section>
 
       <footer class="patrons">
-        <p class="patrons-label">Patronat</p>
-        <div class="patrons-logos">
-          <a href="https://uwb.edu.pl" target="_blank" rel="noopener">
-            <img src="/logo-uwb.png" alt="Uniwersytet w Białymstoku" class="patron-logo" />
-          </a>
-          <a href="https://filozofia.uwb.edu.pl" target="_blank" rel="noopener">
-            <img src="/logo-wfik.png" alt="Wydział Filozofii i Kognitywistyki UwB" class="patron-logo" />
-          </a>
+        <div class="footer-row">
+          <p class="patrons-label">Organizacja</p>
+          <div class="patrons-logos">
+            <img src="/logo-knk.png" alt="Koło Naukowe Kognitywistów UwB" class="patron-logo logo-round" />
+            <a href="https://uwb.edu.pl" target="_blank" rel="noopener">
+              <img src="/logo-uwb.png" alt="Uniwersytet w Białymstoku" class="patron-logo" />
+            </a>
+            <a href="https://filozofia.uwb.edu.pl" target="_blank" rel="noopener">
+              <img src="/logo-wfik.png" alt="Wydział Filozofii i Kognitywistyki UwB" class="patron-logo" />
+            </a>
+          </div>
+        </div>
+        <div class="footer-row">
+          <p class="patrons-label">Patronat</p>
+          <div class="patrons-logos">
+            <span class="patron-tba">Wkrótce</span>
+          </div>
         </div>
       </footer>
     </main>
@@ -320,7 +329,13 @@
       .patrons {
         padding: 2rem 2rem 3rem;
         text-align: center;
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        flex-wrap: wrap;
       }
+
+      .footer-row { text-align: center; }
 
       .patrons-label {
         font-size: 0.75rem;
@@ -328,7 +343,7 @@
         color: var(--text-dim);
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
       }
 
       .patrons-logos {
@@ -352,6 +367,24 @@
       .patron-logo {
         height: 45px;
         width: auto;
+      }
+
+      .patron-logo.logo-round {
+        height: 55px;
+        border-radius: 50%;
+        opacity: 0.45;
+        transition: opacity 0.3s ease;
+      }
+
+      .patron-logo.logo-round:hover {
+        opacity: 0.8;
+      }
+
+      .patron-tba {
+        font-size: 0.8rem;
+        font-style: italic;
+        color: var(--text-dim);
+        opacity: 0.4;
       }
     </style>
 
