@@ -32,7 +32,7 @@
         <!-- KUŁAKOWSKA -->
         <div class="speaker-card" id="kulakowska" style="--speaker-color: var(--accent-violet)">
           <div class="speaker-photo-wrap">
-            <div class="speaker-photo placeholder">AK</div>
+            <img src="/kulakowska.png" alt="prof. Alina Kułakowska" class="speaker-photo" />
           </div>
           <div class="speaker-content">
             <h2 class="speaker-name">prof. dr hab. n. med. Alina Kułakowska</h2>
@@ -42,6 +42,7 @@
               <span class="talk-date">Poniedziałek, 9 marca</span>
             </p>
             <p class="speaker-talk-title">Neurologia leczy choroby mózgu. Profilaktyka chorób mózgu.</p>
+            <button class="bio-toggle">Biogram <span class="bio-arrow">&#9660;</span></button>
             <div class="speaker-bio">
               <p>Prof. Kułakowska jest Prezes Polskiego Towarzystwa Neurologicznego i zastępcą kierownika Kliniki Neurologii Uniwersytetu Medycznego w Białymstoku. Pełni funkcję Konsultanta ds. neurologii w województwie podlaskim oraz Redaktor Naczelnej czasopisma Neurologia Praktyczna.</p>
               <p>Ukończyła Wydział Lekarski Akademii Medycznej w Białymstoku (1992), specjalizację z neurologii uzyskała z wyróżnieniem. Tytuł profesora nauk medycznych otrzymała z rąk Prezydenta RP w 2018 roku. Jej zainteresowania naukowe koncentrują się na etiopatogenezie chorób zapalnych i demielinizacyjnych ośrodkowego układu nerwowego, ze szczególnym uwzględnieniem roli białek wiążących aktynę w procesach zapalnych oraz poszukiwania markerów neurodegeneracji w płynie mózgowo-rdzeniowym. Jest uznawana za eksperta w dziedzinie epidemiologii, patogenezy i leczenia stwardnienia rozsianego.</p>
@@ -63,6 +64,7 @@
               <span class="talk-date">Poniedziałek, 9 marca</span>
             </p>
             <p class="speaker-talk-title">Psychiatria leczy choroby umysłu. Czym zajmuje się psychiatria?</p>
+            <button class="bio-toggle">Biogram <span class="bio-arrow">&#9660;</span></button>
             <div class="speaker-bio">
               <p>Prof. Waszkiewicz jest kierownikiem Kliniki Psychiatrii Uniwersytetu Medycznego w Białymstoku oraz ordynatorem kliniki psychiatrii Uniwersyteckiego Szpitala Klinicznego w Białymstoku. Absolwent Wydziału Lekarskiego Akademii Medycznej w Białymstoku (2003), tytuł profesora uzyskał w 2020 roku.</p>
               <p>Jego dorobek obejmuje ponad 540 publikacji naukowych (indeks Hirscha 36). Od 2022 roku znajduje się w prestiżowym zestawieniu TOP 2% naukowców świata opracowanym przez Uniwersytet Stanforda i Elsevier. Zainteresowania naukowe obejmują badanie biomarkerów zaburzeń psychicznych, uzależnień, wpływu substancji psychoaktywnych na organizm, a także badanie schorzeń psychicznych w aspekcie zmian biochemicznych, neuroobrazowania, neurofizjologii, neuropsychologii, genetyki oraz wpływu diety.</p>
@@ -84,6 +86,7 @@
               <span class="talk-date">Środa, 11 marca &bull; 11:30 &ndash; 13:30</span>
             </p>
             <p class="speaker-talk-title">Neurozglejki i neuromorfy</p>
+            <button class="bio-toggle">Biogram <span class="bio-arrow">&#9660;</span></button>
             <div class="speaker-bio">
               <p>Prof. Duch jest kierownikiem Laboratorium Neurokognitywnego w Interdyscyplinarnym Centrum Nowoczesnych Technologii oraz zespołu Neuroinformatyki i Sztucznej Inteligencji w Centrum Doskonałości DAMSI na Uniwersytecie Mikołaja Kopernika w Toruniu.</p>
               <p>Jego droga naukowa prowadzi od fizyki teoretycznej i chemii kwantowej (doktorat 1980, staż podoktorski na USC w Los Angeles), przez matematykę stosowaną (habilitacja 1987, stypendium Humboldta w Max-Planck-Institut), po sztuczną inteligencję, sieci neuronowe i kognitywistykę. W latach 2012-14 pełnił funkcję Prorektora ds. Badań Naukowych UMK, a w latach 2014-15 wiceministra nauki i szkolnictwa wyższego. Pracował jako visiting professor m.in. na Nanyang Technological University w Singapurze, University of Florida i uniwersytetach w Japonii.</p>
@@ -233,9 +236,49 @@
         font-size: 1rem;
         font-weight: 500;
         color: var(--text-light);
-        margin-bottom: 1.25rem;
+        margin-bottom: 0.75rem;
         font-style: italic;
         line-height: 1.5;
+      }
+
+      .bio-toggle {
+        background: none;
+        border: 1px solid rgba(110, 39, 225, 0.2);
+        border-radius: 4px;
+        color: var(--text-dim);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        padding: 0.3rem 0.8rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+      }
+
+      .bio-toggle:hover {
+        border-color: var(--speaker-color);
+        color: var(--text-light);
+      }
+
+      .bio-arrow {
+        font-size: 0.6rem;
+        display: inline-block;
+        transition: transform 0.3s ease;
+        margin-left: 0.3rem;
+      }
+
+      .speaker-card.bio-open .bio-arrow {
+        transform: rotate(180deg);
+      }
+
+      .speaker-bio {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+
+      .speaker-card.bio-open .speaker-bio {
+        max-height: 600px;
       }
 
       .speaker-bio p {
@@ -246,7 +289,12 @@
         margin-bottom: 0.75rem;
       }
 
-      .speaker-bio p:last-child { margin-bottom: 0; }
+      .speaker-bio p:first-child {
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(110, 39, 225, 0.1);
+      }
+
+      .speaker-bio p:last-child { margin-bottom: 0.5rem; }
 
       /* ── MOBILE ── */
       @media (max-width: 600px) {
@@ -274,12 +322,20 @@
     </style>
 
     <script>
-      // Smooth scroll to targeted speaker
+      // Bio toggle
+      document.querySelectorAll('.bio-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          btn.closest('.speaker-card').classList.toggle('bio-open');
+        });
+      });
+
+      // Smooth scroll + auto-open bio for targeted speaker
       if (window.location.hash) {
         const el = document.querySelector(window.location.hash);
         if (el) {
+          el.classList.add('bio-open');
           setTimeout(() => {
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 300);
         }
       }
