@@ -38,7 +38,7 @@
               <span class="day-date">9.03</span>
             </div>
             <div class="day-location">
-              <span class="loc-icon">&#9672;</span>
+              <span class="loc-label">MIEJSCE:</span>
               Wydział Filozofii i Kognitywistyki, Plac NZS 1
             </div>
             <div class="talks">
@@ -111,7 +111,7 @@
                   <div class="talk-info">
                     <div class="talk-time">11:30 - 13:30</div>
                     <div class="talk-location">
-                      <span class="loc-icon">&#9672;</span>
+                      <span class="loc-label">MIEJSCE:</span>
                       Wydział Fizyki, ul. Ciołkowskiego 1L
                     </div>
                     <div class="talk-title">Neurozglejki i neuromorfy</div>
@@ -130,7 +130,7 @@
                 <div class="talk-header">
                   <div class="talk-info">
                     <div class="talk-location">
-                      <span class="loc-icon">&#9672;</span>
+                      <span class="loc-label">MIEJSCE:</span>
                       Wydział Filozofii i Kognitywistyki, Plac NZS 1
                     </div>
                     <div class="talk-title tba-text">Popołudnie &middot; wkrótce</div>
@@ -345,9 +345,12 @@
         margin-bottom: 0.4rem;
       }
 
-      .loc-icon {
+      .loc-label {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        font-weight: 500;
         color: var(--day-color, var(--accent-violet));
-        font-size: 0.6rem;
+        letter-spacing: 0.05em;
         opacity: 0.7;
       }
 
@@ -510,9 +513,6 @@
           if (!wasOpen) talk.classList.add('open');
         });
       });
-      // Open first talk by default
-      const first = document.querySelector('[data-expandable]');
-      if (first) first.classList.add('open');
     </script>
   </body>
 </html>
