@@ -24,6 +24,7 @@
     <main>
       <section class="hero">
         <h1>CYBER BRAIN</h1>
+        <p class="subtitle hero-subtitle">Dowiedz się jak myśli Twój mózg</p>
         <p class="location">IX Tydzień Mózgu w Białymstoku</p>
         <p class="dates">9–13 marca 2026</p>
         
@@ -159,6 +160,7 @@
       }
 
       .hero.animated h1,
+      .hero.animated .hero-subtitle,
       .hero.animated .location,
       .hero.animated .dates,
       .hero.animated .cta {
@@ -167,15 +169,25 @@
         transform: none;
       }
 
+      .hero-subtitle {
+        font-size: 0.95rem;
+        color: var(--text-light);
+        letter-spacing: 0.15em;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        opacity: 0;
+        animation: fadeUp 1.5s ease-out 1s forwards;
+      }
+
       .location {
         font-size: 1.05rem;
         font-weight: 600;
         color: var(--text-light);
         letter-spacing: 0.1em;
-        margin-top: 0.5rem;
+        margin-top: 0.3rem;
         margin-bottom: 0.8rem;
         opacity: 0;
-        animation: fadeUp 1.5s ease-out 1s forwards;
+        animation: fadeUp 1.5s ease-out 1.2s forwards;
       }
 
       .dates {
@@ -186,7 +198,7 @@
         letter-spacing: 0.2em;
         margin-bottom: 2.5rem;
         opacity: 0;
-        animation: fadeUp 1.5s ease-out 1.2s forwards;
+        animation: fadeUp 1.5s ease-out 1.4s forwards;
       }
 
       .cta {
@@ -195,7 +207,7 @@
         justify-content: center;
         flex-wrap: wrap;
         opacity: 0;
-        animation: fadeUp 1.5s ease-out 1.4s forwards;
+        animation: fadeUp 1.5s ease-out 1.6s forwards;
       }
 
       @keyframes fadeUp {
@@ -446,7 +458,7 @@
       // Lock animations after they finish so they never replay
       setTimeout(() => {
         document.querySelector('.hero').classList.add('animated');
-      }, 3000);
+      }, 3500);
 
       // Redraw canvas on width change only (no page reload)
       let lastWidth = window.innerWidth;
