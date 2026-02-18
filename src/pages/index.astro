@@ -71,11 +71,20 @@
       </section>
 
       <section class="share">
-        <div class="share-card">
-          <img src="/qr.png" alt="QR kod - cyberbrain.pl" class="share-qr" />
-          <div class="share-text">
-            <p class="share-label">Podziel się</p>
-            <p class="share-url">cyberbrain.pl</p>
+        <div class="share-row">
+          <div class="share-card">
+            <img src="/qr.png" alt="QR kod - cyberbrain.pl" class="share-qr" />
+            <div class="share-text">
+              <p class="share-label">Podziel się</p>
+              <p class="share-url">cyberbrain.pl</p>
+            </div>
+          </div>
+          <div class="share-card contact-card">
+            <div class="contact-text">
+              <p class="share-label">Kontakt</p>
+              <a href="mailto:olgierd.borowiecki@gmail.com" class="contact-link">olgierd.borowiecki@gmail.com</a>
+              <p class="contact-note">Wydarzenie na Facebooku wkrótce</p>
+            </div>
           </div>
         </div>
       </section>
@@ -274,16 +283,25 @@
         padding: 3rem 2rem 4rem;
       }
 
+      .share-row {
+        display: flex;
+        gap: 1.5rem;
+        max-width: 700px;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: stretch;
+      }
+
       .share-card {
         display: flex;
         align-items: center;
-        gap: 2rem;
-        max-width: 360px;
-        margin: 0 auto;
-        background: rgba(110, 39, 225, 0.05);
+        gap: 1.5rem;
+        flex: 1;
+        max-width: 340px;
+        background: rgba(0, 0, 0, 0.45);
         border: 1px solid rgba(110, 39, 225, 0.2);
         border-radius: 8px;
-        padding: 1.5rem 2rem;
+        padding: 1.5rem 1.5rem;
         transition: border-color 0.3s ease;
       }
 
@@ -291,9 +309,15 @@
         border-color: rgba(110, 39, 225, 0.4);
       }
 
+      .contact-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
       .share-qr {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
         flex-shrink: 0;
       }
 
@@ -302,7 +326,7 @@
       }
 
       .share-label {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
         font-weight: 300;
         color: var(--text-dim);
         letter-spacing: 0.1em;
@@ -315,6 +339,32 @@
         font-size: 1.1rem;
         font-weight: 500;
         color: var(--accent-cyan);
+      }
+
+      .contact-text {
+        text-align: left;
+      }
+
+      .contact-link {
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: var(--accent-cyan);
+        text-decoration: none;
+        word-break: break-all;
+        transition: color 0.2s ease;
+      }
+
+      .contact-link:hover {
+        color: var(--accent-pink);
+      }
+
+      .contact-note {
+        font-size: 0.75rem;
+        font-weight: 300;
+        color: var(--text-dim);
+        font-style: italic;
+        margin-top: 0.5rem;
       }
 
       .patrons {
@@ -382,6 +432,8 @@
         main { padding: 1rem; }
         .about, .faq { padding: 3rem 1rem; }
         .faq-grid { grid-template-columns: 1fr; }
+        .share-row { flex-direction: column; align-items: center; }
+        .share-card { max-width: 100%; }
       }
     </style>
 
