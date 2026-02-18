@@ -79,10 +79,6 @@
           </div>
 
           <!-- TUESDAY col 3 -->
-          <!-- 11:30-13:00 Dudek online = row 4-10 -->
-          <div class="tt-event tt-online" style="grid-column:3; grid-row:4/10">
-            <span class="tt-evt-time">11:30 🌐</span>TBA
-          </div>
           <!-- 16:00-17:30 Stoiska = row 22-28 -->
           <div class="tt-event tt-stoiska" style="grid-column:3; grid-row:22/28">
             <span class="tt-evt-time">16:00</span>Stoiska Studentów
@@ -111,6 +107,10 @@
           </div>
 
           <!-- THURSDAY col 5 -->
+          <!-- 11:30-13:00 Dudek online = row 4-10 -->
+          <div class="tt-event tt-online" style="grid-column:5; grid-row:4/10">
+            <span class="tt-evt-time">11:30 🌐</span>Unde malum?
+          </div>
           <!-- 15:00-16:30 TBA = row 18-24 -->
           <div class="tt-event tt-wyklad" style="grid-column:5; grid-row:18/24">
             <span class="tt-evt-time">15:00</span>TBA
@@ -245,17 +245,32 @@
 
         <!-- CZWARTEK -->
         <div class="day" style="--day-color: #7bc4d0">
-          <div class="node"><div class="node-dot tba-dot"></div></div>
-          <div class="day-card tba-card">
+          <div class="node"><div class="node-dot"></div></div>
+          <div class="day-card">
             <div class="day-header">
               <span class="day-name">Czwartek</span>
               <span class="day-date">12.03</span>
             </div>
             <div class="talks">
+              <div class="talk" data-expandable>
+                <div class="talk-header">
+                  <div class="talk-info">
+                    <div class="talk-time">11:30 - 13:00 &bull; online</div>
+                    <div class="talk-title">Unde malum? Psychiatria wobec zła</div>
+                    <a href="/prelegenci#dudek" class="talk-speaker">dr hab. n. med. Dominika Dudek, prof. UJ</a>
+                  </div>
+                  <div class="talk-arrow">&#9660;</div>
+                </div>
+                <div class="talk-body">
+                  <p>Wykład „Unde malum?" poświęcony jest pytaniu o źródła zła: czy wynikają one z indywidualnych cech człowieka (model dyspozycyjny), czy z wpływu sytuacji i kontekstu społecznego (model sytuacyjny). Autorka omawia eksperymenty Milgrama i Zimbardo, neurobiologiczne podstawy moralności oraz rolę struktur przedczołowych i układu limbicznego w podejmowaniu decyzji etycznych, wskazując, że moralność ma swoje zakorzenienie w mózgu.</p>
+                  <p>Przedstawia także przykłady socjopatii nabytej (uszkodzenia mózgu, guzy, otępienie czołowo-skroniowe) oraz psychopatii, podkreślając złożoność odpowiedzialności moralnej. W drugiej części wykładu analizuje psychiczne konsekwencje traumy: od PTSD po uraz zastępczy, akcentując konieczność holistycznego, biopsychospołecznego spojrzenia w psychiatrii oraz refleksji nad naturą zła i ludzkiego cierpienia.</p>
+                </div>
+              </div>
+
               <div class="talk tba">
                 <div class="talk-header">
                   <div class="talk-info">
-                    <div class="talk-title tba-text">Wkrótce</div>
+                    <div class="talk-title tba-text">Popołudnie &middot; wkrótce</div>
                   </div>
                 </div>
               </div>
@@ -745,7 +760,12 @@
         .nav-brain { width: 42px; height: 42px; margin-left: 0; margin-top: 0; }
 
         .nav-btn {
-          display: none;
+          position: absolute;
+          right: 0;
+          top: 0.65rem;
+          min-width: auto;
+          padding: 0.4rem 0.8rem;
+          font-size: 0.65rem;
         }
 
         .timetable {
