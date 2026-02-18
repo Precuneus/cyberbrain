@@ -142,6 +142,15 @@ h1 {
   background: rgba(110, 39, 225, 0.2);
 }
 
+/* Nav buttons on subpages: no dark bg needed (solid background) */
+.nav-btn.button-secondary {
+  background: transparent;
+}
+
+.nav-btn.button-secondary:hover {
+  background: rgba(110, 39, 225, 0.1);
+}
+
 /* === FOOTER === */
 .footer-note {
   text-align: center;
