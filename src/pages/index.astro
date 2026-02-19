@@ -220,6 +220,10 @@
         animation: fadeUp 1.5s ease-out 1.6s forwards;
       }
 
+      .cta .button-secondary {
+        background: rgba(0, 0, 0, 0.5);
+      }
+
       @keyframes fadeUp {
         0% { opacity: 0; transform: translateY(20px); }
         100% { opacity: 1; transform: translateY(0); }
@@ -230,6 +234,9 @@
         width: 100%;
         padding: 4rem 2rem;
         text-align: center;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        margin-bottom: 2rem;
       }
 
       .about h2, .faq h2 {
@@ -272,7 +279,7 @@
         font-size: 0.9rem;
         font-weight: 300;
         line-height: 1.6;
-        color: var(--text-dim);
+        color: var(--text-mid);
       }
 
       .faq-item p strong { color: var(--text-light); font-weight: 600; }
@@ -316,8 +323,8 @@
       }
 
       .share-qr {
-        width: 100px;
-        height: 100px;
+        width: 140px;
+        height: 140px;
         flex-shrink: 0;
       }
 
