@@ -67,15 +67,15 @@
           </div>
           <!-- 15:00-15:40 Neurologia = row 18-21 (approx) -->
           <div class="tt-event tt-wyklad" style="grid-column:2; grid-row:18/21">
-            <span class="tt-evt-time">15:00</span>Neurologia leczy choroby mózgu
+            <span class="tt-evt-time">15:00</span>Neurologia
           </div>
           <!-- 15:40-16:30 Stoiska = row 21-24 -->
           <div class="tt-event tt-stoiska" style="grid-column:2; grid-row:21/24">
-            Stoiska Studentów
+            Stoiska
           </div>
           <!-- 16:30-17:10 Psychiatria = row 24-27 (approx) -->
           <div class="tt-event tt-wyklad" style="grid-column:2; grid-row:24/27">
-            <span class="tt-evt-time">16:30</span>Psychiatria leczy choroby umysłu
+            <span class="tt-evt-time">16:30</span>Psychiatria
           </div>
 
           <!-- TUESDAY col 3 -->
@@ -509,10 +509,10 @@
         background: linear-gradient(
           180deg,
           var(--accent-violet) 0%,
-          #5a3be8 25%,
-          var(--accent-cyan) 50%,
-          #7bc4d0 75%,
-          var(--accent-pink) 100%
+          var(--accent-cyan) 25%,
+          var(--accent-violet) 50%,
+          var(--accent-cyan) 75%,
+          var(--accent-violet) 100%
         );
         opacity: 0.35;
       }
@@ -823,7 +823,8 @@
         .day-header { padding: 0.75rem 1rem; }
         .day-name { font-size: 0.75rem; }
         .talks { padding: 0 0.75rem 1rem; }
-        .talk-header { padding: 0.75rem 1rem; }
+        .talk-header { padding: 0.75rem 1rem; flex-wrap: wrap; }
+        .talk-arrow { width: 100%; text-align: center; margin-top: 0.25rem; }
         .talk-body p { padding: 0 1rem; font-size: 0.85rem; }
         .talk-title { font-size: 0.95rem; }
       }
