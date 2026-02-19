@@ -139,16 +139,16 @@
               <span class="day-name">Poniedziałek</span>
               <span class="day-date">9.03</span>
             </div>
-            <div class="day-location">
-              <span class="loc-label">MIEJSCE:</span>
-              Wydział Filozofii i Kognitywistyki, Plac NZS 1
-            </div>
             <div class="talks">
               <div class="talk" data-expandable>
                 <div class="talk-header">
                   <div class="talk-info">
-                    <div class="talk-title">Neurologia leczy choroby mózgu</div>
-                    <div class="talk-subtitle">Profilaktyka chorób mózgu</div>
+                    <div class="talk-time">15:00 - 15:40</div>
+                    <div class="talk-location">
+                      <span class="loc-label">MIEJSCE:</span>
+                      Wydział Filozofii i Kognitywistyki, Plac NZS 1
+                    </div>
+                    <div class="talk-title">Neurologia leczy choroby mózgu. Profilaktyka chorób mózgu.</div>
                     <a href="/prelegenci#kulakowska" class="talk-speaker">prof. dr hab. n. med. Alina Kułakowska</a>
                   </div>
                   <div class="talk-arrow">&#9660;</div>
@@ -163,8 +163,12 @@
               <div class="talk" data-expandable>
                 <div class="talk-header">
                   <div class="talk-info">
-                    <div class="talk-title">Psychiatria leczy choroby umysłu</div>
-                    <div class="talk-subtitle">Czym zajmuje się psychiatria?</div>
+                    <div class="talk-time">16:30 - 17:10</div>
+                    <div class="talk-location">
+                      <span class="loc-label">MIEJSCE:</span>
+                      Wydział Filozofii i Kognitywistyki, Plac NZS 1
+                    </div>
+                    <div class="talk-title">Psychiatria leczy choroby umysłu. Czym zajmuje się psychiatria?</div>
                     <a href="/prelegenci#waszkiewicz" class="talk-speaker">prof. dr hab. n. med. Napoleon Waszkiewicz</a>
                   </div>
                   <div class="talk-arrow">&#9660;</div>
@@ -262,7 +266,10 @@
               <div class="talk" data-expandable>
                 <div class="talk-header">
                   <div class="talk-info">
-                    <div class="talk-time">11:30 - 13:00 &bull; online</div>
+                    <div class="talk-time">11:30 - 13:00</div>
+                    <div class="talk-location">
+                      <span class="loc-label">ONLINE</span>
+                    </div>
                     <div class="talk-title">Unde malum? Psychiatria wobec zła.</div>
                     <a href="/prelegenci#dudek" class="talk-speaker">prof. dr hab. n. med. Dominika Dudek</a>
                   </div>
@@ -595,7 +602,6 @@
       }
 
       /* ── LOCATIONS ── */
-      .day-location,
       .talk-location {
         font-size: 0.8rem;
         color: var(--text-mid);
@@ -603,14 +609,6 @@
         display: flex;
         align-items: center;
         gap: 0.4rem;
-      }
-
-      .day-location {
-        padding: 0 1.5rem 0.5rem;
-        margin-top: -0.25rem;
-      }
-
-      .talk-location {
         margin-bottom: 0.4rem;
       }
 
@@ -674,13 +672,6 @@
         font-weight: 300;
         font-style: italic;
         font-size: 0.9rem;
-      }
-
-      .talk-subtitle {
-        font-size: 0.85rem;
-        color: var(--text-dim);
-        font-weight: 300;
-        margin-bottom: 0.5rem;
       }
 
       .talk-time {
