@@ -76,19 +76,25 @@
         <!-- ŚLIWECKI -->
         <div class="speaker-card" id="sliwecki" style="--speaker-color: var(--accent-cyan)">
           <div class="speaker-photo-wrap">
-            <div class="speaker-photo placeholder">BŚ</div>
+            <img src="/sliwecki.png" alt="dr inż. Bartosz Śliwecki" class="speaker-photo" />
           </div>
           <div class="speaker-content">
-            <h2 class="speaker-name">dr Bartosz Śliwecki</h2>
-            <p class="speaker-affiliation">Wkrótce</p>
+            <h2 class="speaker-name">dr inż. Bartosz Śliwecki</h2>
+            <p class="speaker-affiliation">Wydział Architektury, Politechnika Białostocka</p>
             <p class="speaker-talk">
               <span class="talk-label">Wykład</span>
               <span class="talk-date">Wtorek, 10 marca &bull; 15:00</span>
             </p>
-            <p class="speaker-talk-title">Temat wkrótce</p>
+            <p class="speaker-talk-title">&bdquo;Gdzie się patrzysz?&rdquo; Czyli jak eye-tracking weryfikuje to, co naprawdę widzimy na wizualizacjach.</p>
             <button class="bio-toggle">Biogram <span class="bio-arrow">&#9660;</span></button>
             <div class="speaker-bio">
-              <p>Biogram wkrótce.</p>
+              <p>Bartosz Śliwecki jest pracownikiem Wydziału Architektury Politechniki Białostockiej, związanym z dydaktyką i badaniami w obszarze nowych technologii w projektowaniu architektonicznym. Prowadzi zajęcia z zakresu wykorzystania narzędzi cyfrowych i sztucznej inteligencji w procesie projektowym, m.in. Projektowanie Architektoniczne Wspomagane Komputerowo, Interaktywne Prezentacje Architektoniczne oraz Projektowanie Eksperymentalne.</p>
+              <p>W pracy naukowej koncentruje się na integracji generatywnej AI w edukacji architektonicznej, analizie procesu projektowego z wykorzystaniem prompt engineeringu, badaniach eye-trackingowych w kontekście wizualizacji architektonicznych, percepcji przestrzeni i wiarygodności obrazów generowanych komputerowo, a także na zagadnieniach wayfindingu oraz systemów informacji przestrzennej. Łączy podejście projektowe z analizą empiryczną, prowadząc eksperymenty z udziałem studentów oraz badania nad optymalnym momentem wdrażania narzędzi AI w programie studiów architektonicznych.</p>
+            </div>
+            <button class="abstract-toggle">Abstrakt <span class="bio-arrow">&#9660;</span></button>
+            <div class="speaker-abstract">
+              <p>Współczesna wizualizacja architektoniczna pełni kluczową rolę w komunikacji na linii projektant &ndash; inwestor &ndash; użytkownik końcowy. Tradycyjne metody oceny jakości wizualizacji często opierają się na subiektywnych odczuciach lub deklaratywnych ankietach, które nie zawsze odzwierciedlają rzeczywiste procesy poznawcze odbiorcy. Celem wystąpienia jest zaprezentowanie okulografii (eye-trackingu) jako obiektywnego i skutecznego narzędzia badawczego, pozwalającego na weryfikację tego, jak użytkownicy faktycznie odbierają prezentowaną architekturę.</p>
+              <p>Podczas prezentacji omówione zostanie, w jaki sposób śledzenie ruchów gałek ocznych (analiza punktów fiksacji, sakad oraz map cieplnych) pozwala zidentyfikować elementy wizualizacji, które naturalnie przyciągają uwagę, oraz te, które są przez odbiorców ignorowane. Na podstawie analizy preferencji wizualnych, prelekcja wykaże, że okulografia dostarcza twardych danych ułatwiających lepsze kadrowanie, operowanie światłem i kompozycją.</p>
             </div>
           </div>
         </div>
@@ -168,7 +174,7 @@
               <span class="talk-label">Cafe Naukowa</span>
               <span class="talk-date">Środa, 11 marca &bull; wieczorem &bull; Kawiarnia Fama (PB)</span>
             </p>
-            <p class="speaker-talk-title">Co możesz sobie wyobrazić?</p>
+            <p class="speaker-talk-title">Czym jest umysł?</p>
             <button class="bio-toggle">Biogram <span class="bio-arrow">&#9660;</span></button>
             <div class="speaker-bio">
               <p>Biogram wkrótce.</p>
@@ -441,6 +447,57 @@
 
       .speaker-bio p:last-child { margin-bottom: 0.5rem; }
 
+      .abstract-toggle {
+        background: rgba(0, 217, 200, 0.08);
+        border: 1px solid rgba(0, 217, 200, 0.25);
+        border-radius: 4px;
+        color: var(--text-mid);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        padding: 0.35rem 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+        width: 100%;
+        text-align: center;
+      }
+
+      .abstract-toggle:hover {
+        background: rgba(0, 217, 200, 0.15);
+        border-color: var(--accent-cyan);
+        color: var(--text-light);
+      }
+
+      .speaker-card.abstract-open .abstract-toggle .bio-arrow {
+        transform: rotate(180deg);
+      }
+
+      .speaker-abstract {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+
+      .speaker-card.abstract-open .speaker-abstract {
+        max-height: 600px;
+      }
+
+      .speaker-abstract p {
+        font-size: 0.9rem;
+        color: var(--text-mid);
+        line-height: 1.8;
+        font-weight: 300;
+        margin-bottom: 0.75rem;
+      }
+
+      .speaker-abstract p:first-child {
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(0, 217, 200, 0.1);
+      }
+
+      .speaker-abstract p:last-child { margin-bottom: 0.5rem; }
+
       /* ── MOBILE ── */
       @media (max-width: 600px) {
         body { padding: 1rem; padding-top: 2rem; }
@@ -501,6 +558,13 @@
       document.querySelectorAll('.bio-toggle').forEach(btn => {
         btn.addEventListener('click', () => {
           btn.closest('.speaker-card').classList.toggle('bio-open');
+        });
+      });
+
+      // Abstract toggle
+      document.querySelectorAll('.abstract-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          btn.closest('.speaker-card').classList.toggle('abstract-open');
         });
       });
 
