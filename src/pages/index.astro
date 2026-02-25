@@ -39,7 +39,7 @@
         <p class="about-text">
           CYBER BRAIN to białostocka odsłona międzynarodowego <strong>Brain Awareness Week</strong> – 
           ogólnoświatowej inicjatywy popularyzującej wiedzę o mózgu i układzie nerwowym. 
-          Przez pięć dni naukowcy, praktycy i entuzjaści spotykają się, by rozmawiać o tym, 
+          Przez cztery dni naukowcy, praktycy i entuzjaści spotykają się, by rozmawiać o tym, 
           jak działa nasz mózg – i jak działają jego sztuczne odpowiedniki.
         </p>
         <p class="about-text">
@@ -65,7 +65,11 @@
           </div>
           <div class="faq-item">
             <h3>Gdzie odbywają się wydarzenia?</h3>
-            <p>Na Wydziale Filozofii i Kognitywistyki UwB przy Placu NZS 1, Wydziale Informatyki PB przy ul. Wiejskiej 45A, Wydziale Fizyki UwB przy ul. Ciołkowskiego 1L oraz w Kawiarni Fama przy ul. Legionowej 5. Szczegóły lokalizacji w <a href="/program">programie</a>.</p>
+            <p class="venue-line">Wydział Filozofii i Kognitywistyki UwB, Plac NZS 1</p>
+            <p class="venue-line">Wydział Informatyki PB, ul. Wiejska 45A</p>
+            <p class="venue-line">Wydział Fizyki UwB, ul. Ciołkowskiego 1L</p>
+            <p class="venue-line">Kawiarnia Fama, ul. Legionowa 5</p>
+            <p>Szczegóły lokalizacji w <a href="/program">programie</a>.</p>
           </div>
         </div>
       </section>
@@ -296,6 +300,21 @@
       .faq-item p strong { color: var(--text-light); font-weight: 600; }
       .faq-item a { color: var(--accent-cyan); text-decoration: none; }
       .faq-item a:hover { text-decoration: underline; }
+
+      .venue-line {
+        margin-bottom: 0.2rem;
+        font-size: 0.9rem;
+        color: var(--text-mid);
+        padding-left: 1rem;
+        position: relative;
+      }
+
+      .venue-line::before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        color: var(--accent-cyan);
+      }
 
       .share {
         padding: 3rem 2rem 4rem;
