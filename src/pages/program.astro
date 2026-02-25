@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="Program CYBER BRAIN 2026 - Uniwersytet w Białymstoku, 9-13 marca." />
+    <meta name="description" content="Program CYBER BRAIN 2026 - Uniwersytet w Białymstoku, 9-12 marca." />
     <title>Program | CYBER BRAIN 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,7 +24,7 @@
           <h1>Program</h1>
           <a href="/prelegenci" class="button button-secondary nav-btn">Prelegenci</a>
         </div>
-        <p class="subtitle">9-13 marca 2026 &bull; IX Tydzień Mózgu w Białymstoku</p>
+        <p class="subtitle">9-12 marca 2026 &bull; IX Tydzień Mózgu w Białymstoku</p>
       </header>
 
       <!-- VISUAL TIMETABLE -->
@@ -36,7 +36,7 @@
           <div class="tt-day-head" style="grid-column:3">Wt<span class="tt-date">10.03</span></div>
           <div class="tt-day-head" style="grid-column:4">Śr<span class="tt-date">11.03</span></div>
           <div class="tt-day-head" style="grid-column:5">Czw<span class="tt-date">12.03</span></div>
-          <div class="tt-day-head" style="grid-column:6">Pt<span class="tt-date">13.03</span></div>
+
 
           <!-- Time labels at each hour -->
           <div class="tt-time" style="grid-row:2">11:00</div>
@@ -50,15 +50,15 @@
           <div class="tt-time" style="grid-row:34">19:00</div>
 
           <!-- Grid lines at each hour -->
-          <div class="tt-gridline" style="grid-row:2; grid-column:2/7"></div>
-          <div class="tt-gridline" style="grid-row:6; grid-column:2/7"></div>
-          <div class="tt-gridline" style="grid-row:10; grid-column:2/7"></div>
-          <div class="tt-gridline" style="grid-row:14; grid-column:2/7"></div>
-          <div class="tt-gridline" style="grid-row:18; grid-column:2/7"></div>
-          <div class="tt-gridline" style="grid-row:22; grid-column:2/7"></div>
-          <div class="tt-gridline" style="grid-row:26; grid-column:2/7"></div>
-          <div class="tt-gridline" style="grid-row:30; grid-column:2/7"></div>
-          <div class="tt-gridline" style="grid-row:34; grid-column:2/7"></div>
+          <div class="tt-gridline" style="grid-row:2; grid-column:2/6"></div>
+          <div class="tt-gridline" style="grid-row:6; grid-column:2/6"></div>
+          <div class="tt-gridline" style="grid-row:10; grid-column:2/6"></div>
+          <div class="tt-gridline" style="grid-row:14; grid-column:2/6"></div>
+          <div class="tt-gridline" style="grid-row:18; grid-column:2/6"></div>
+          <div class="tt-gridline" style="grid-row:22; grid-column:2/6"></div>
+          <div class="tt-gridline" style="grid-row:26; grid-column:2/6"></div>
+          <div class="tt-gridline" style="grid-row:30; grid-column:2/6"></div>
+          <div class="tt-gridline" style="grid-row:34; grid-column:2/6"></div>
 
           <!-- MONDAY col 2 -->
           <!-- 13:00-15:00 Stoiska = row 10-18 -->
@@ -81,7 +81,7 @@
           <!-- TUESDAY col 3 -->
           <!-- 15:00-16:00 Sliwecki = row 18-22 -->
           <div class="tt-event tt-wyklad" style="grid-column:3; grid-row:18/22">
-            <span class="tt-evt-time">15:00</span>Gdzie się patrzysz?
+            <span class="tt-evt-time">15:00</span>&bdquo;Gdzie się patrzysz?&rdquo;
           </div>
           <!-- 16:00-17:30 Stoiska = row 22-28 -->
           <div class="tt-event tt-stoiska" style="grid-column:3; grid-row:22/28">
@@ -125,11 +125,6 @@
           <!-- 15:00-16:30 Jankowiak-Siuda = row 18-24 -->
           <div class="tt-event tt-wyklad" style="grid-column:5; grid-row:18/24">
             <span class="tt-evt-time">15:00</span>Mózg empatyczny
-          </div>
-
-          <!-- FRIDAY col 6 -->
-          <div class="tt-event tt-tba" style="grid-column:6; grid-row:18/22">
-            <span class="tt-evt-time">TBA</span>
           </div>
         </div>
 
@@ -379,26 +374,6 @@
           </div>
         </div>
 
-        <!-- PIĄTEK -->
-        <div class="day" style="--day-color: var(--accent-violet)">
-          <div class="node"><div class="node-dot tba-dot"></div></div>
-          <div class="day-card tba-card">
-            <div class="day-header">
-              <span class="day-name">Piątek</span>
-              <span class="day-date">13.03</span>
-            </div>
-            <div class="talks">
-              <div class="talk tba">
-                <div class="talk-header">
-                  <div class="talk-info">
-                    <div class="talk-title tba-text">Wkrótce</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
 
       <p class="footer-note">Program w przygotowaniu. Śledź aktualizacje.</p>
@@ -441,7 +416,7 @@
 
       .timetable {
         display: grid;
-        grid-template-columns: 52px repeat(5, 1fr);
+        grid-template-columns: 52px repeat(4, 1fr);
         grid-template-rows: auto repeat(35, 24px);
         gap: 0;
         border-radius: 8px;
@@ -881,7 +856,7 @@
         }
 
         .timetable {
-          grid-template-columns: 0 repeat(5, 1fr);
+          grid-template-columns: 0 repeat(4, 1fr);
           grid-template-rows: auto repeat(35, 22px);
         }
 
