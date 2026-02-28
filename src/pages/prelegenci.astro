@@ -287,7 +287,6 @@
         align-items: center;
         justify-content: center;
         gap: 0.4rem;
-        padding: 0.1rem 1.5rem;
       }
 
       .nav-arrow {
@@ -303,8 +302,8 @@
       }
 
       .nav-brain-small {
-        width: 28px;
-        height: 28px;
+        max-height: 100%;
+        width: auto;
         transition: opacity 0.3s ease;
       }
 
@@ -315,6 +314,8 @@
         text-align: center;
         padding: 0.6rem 1.5rem;
         font-size: 0.75rem;
+        height: 2.5rem;
+        box-sizing: border-box;
       }
 
       /* ── SPEAKERS ── */
@@ -623,7 +624,7 @@
           flex-shrink: 0;
         }
 
-        .nav-brain-small { width: 28px; height: 28px; }
+        
 
         h1 {
           font-size: 1rem;
