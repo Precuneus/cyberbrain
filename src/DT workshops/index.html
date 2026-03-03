@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who Are You?</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --fg: #e8e4de;
+    --accent: #c4a882;
+    --dim: #6b6560;
+    --card-bg: rgba(255,255,255,0.04);
+    --card-border: rgba(255,255,255,0.08);
+    --error: #c45a5a;
+    --success: #82c4a0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  .screen {
+    display: none;
+    min-height: 100dvh;
+    padding: 2rem 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.6s ease;
+  }
+
+  .screen.active { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .landing-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(3rem, 12vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .landing-title em { font-style: italic; color: var(--accent); }
+
+  .landing-sub {
+    font-size: 1rem;
+    color: var(--dim);
+    text-align: center;
+    max-width: 320px;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .btn-start {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--bg);
+    background: var(--fg);
+    border: none;
+    padding: 1rem 3rem;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+  }
+
+  .btn-start:hover { background: var(--accent); transform: scale(1.02); }
+
+  .btn-start:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .puzzle-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 0.9rem;
+    color: var(--dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .puzzle-prompt {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.4rem, 4.5vw, 2rem);
+    line-height: 1.4;
+    text-align: center;
+    max-width: 560px;
+    margin-bottom: 0.8rem;
+  }
+
+  .puzzle-context {
+    font-size: 0.95rem;
+    color: var(--dim);
+    text-align: center;
+    max-width: 480px;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .option-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--fg);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 1.2rem 1.5rem;
+    cursor: pointer;
+    text-align: left;
+    line-height: 1.5;
+    transition: all 0.25s ease;
+  }
+
+  .option-btn:hover {
+    border-color: var(--accent);
+    background: rgba(196, 168, 130, 0.06);
+  }
+
+  .option-btn .option-letter {
+    color: var(--accent);
+    font-weight: 500;
+    margin-right: 0.5rem;
+  }
+
+  .gate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .gate-message {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.3rem, 4vw, 1.7rem);
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+
+  .gate-sub {
+    font-size: 0.9rem;
+    color: var(--dim);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .gate-input-row {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .gate-input {
+    flex: 1;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--fg);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 1rem 1.2rem;
+    text-align: center;
+    letter-spacing: 0.15em;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .gate-input:focus { border-color: var(--accent); }
+
+  .gate-input.error {
+    border-color: var(--error);
+    animation: shake 0.4s ease;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  .gate-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--bg);
+    background: var(--fg);
+    border: none;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .gate-btn:hover { background: var(--accent); }
+
+  .task-label {
+    font-family: 'Instrument Serif', serif;
+    font-size: 0.9rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .task-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
+    line-height: 1.5;
+    text-align: center;
+    max-width: 540px;
+    margin-bottom: 1.5rem;
+  }
+
+  .task-rule {
+    font-size: 0.9rem;
+    color: var(--accent);
+    text-align: center;
+    max-width: 440px;
+    line-height: 1.6;
+    font-weight: 400;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(196, 168, 130, 0.2);
+  }
+
+  .waiting-icon {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.4;
+    animation: breathe 3s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.05); }
+  }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--dim);
+    margin: 1.5rem 0;
+  }
+
+  .p2-question-label {
+    max-width: 480px;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: var(--fg);
+    text-align: center;
+  }
+
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.5s ease;
+  }
+
+  .reset-link {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.75rem;
+    color: var(--dim);
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+
+  .reset-link:hover { opacity: 1; }
+
+  .feedback-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .feedback-question {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.1rem;
+    color: var(--fg);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .feedback-stars {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .star-btn {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--dim);
+    transition: all 0.2s ease;
+    padding: 0.25rem;
+  }
+
+  .star-btn:hover,
+  .star-btn.active { color: var(--accent); transform: scale(1.15); }
+
+  .feedback-textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--fg);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 1rem 1.2rem;
+    width: 100%;
+    min-height: 100px;
+    resize: vertical;
+    outline: none;
+    line-height: 1.5;
+    transition: border-color 0.3s;
+  }
+
+  .feedback-textarea:focus { border-color: var(--accent); }
+  .feedback-textarea::placeholder { color: var(--dim); }
+
+  .feedback-sent {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .feedback-sent.active { display: flex; }
+
+  .feedback-check { font-size: 3rem; color: var(--success); }
+
+  .feedback-thanks {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.3rem;
+    color: var(--fg);
+  }
+
+  .feedback-error {
+    font-size: 0.85rem;
+    color: var(--error);
+    display: none;
+  }
+
+  .feedback-error.active { display: block; }
+
+  .btn-feedback-link {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--dim);
+    background: none;
+    border: 1px solid var(--card-border);
+    padding: 0.7rem 1.5rem;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: all 0.25s ease;
+  }
+
+  .btn-feedback-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  .sending-text {
+    font-size: 0.9rem;
+    color: var(--dim);
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress" style="width: 0%"></div>
+
+<!-- LANDING -->
+<div class="screen active" id="screen-landing">
+  <div class="landing-title">Who<br>Are <em>You?</em></div>
+  <p class="landing-sub">Two questions. One task. Build something that shows the room who you are.</p>
+  <button class="btn-start" onclick="goTo('screen-puzzle1')">Begin</button>
+</div>
+
+<!-- PUZZLE 1 -->
+<div class="screen" id="screen-puzzle1">
+  <div class="puzzle-number">Question One</div>
+  <div class="puzzle-prompt">Close your eyes for ten seconds. Imagine an apple.</div>
+  <div class="divider"></div>
+  <p class="puzzle-context">Now, honestly: what happened inside your head?</p>
+  <div class="options">
+    <button class="option-btn" onclick="selectP1('visual')">
+      <span class="option-letter">A.</span> I saw it. A vivid picture: color, shape, maybe even light on the skin.
+    </button>
+    <button class="option-btn" onclick="selectP1('kinesthetic')">
+      <span class="option-letter">B.</span> I didn't really "see" anything, but I felt it: the weight in my hand, the texture, the crunch if I bit it.
+    </button>
+    <button class="option-btn" onclick="selectP1('verbal')">
+      <span class="option-letter">C.</span> I mostly heard the word "apple" in my head, or started describing it to myself in words.
+    </button>
+    <button class="option-btn" onclick="selectP1('conceptual')">
+      <span class="option-letter">D.</span> I just... knew it was an apple. No image, no sound, no sensation. The concept was there, but nothing sensory.
+    </button>
+  </div>
+</div>
+
+<!-- GATE 1 -->
+<div class="screen" id="screen-gate1">
+  <div class="waiting-icon">&#9679;</div>
+  <div class="gate">
+    <div class="gate-message">Wait for the facilitator.</div>
+    <div class="gate-sub">When everyone is ready, you will receive a code to continue.</div>
+    <div class="gate-input-row">
+      <input type="text" class="gate-input" id="gate1-input" placeholder="code" autocomplete="off" onkeydown="if(event.key==='Enter')checkGate(1)">
+      <button class="gate-btn" onclick="checkGate(1)">Go</button>
+    </div>
+  </div>
+</div>
+
+<!-- PUZZLE 2 -->
+<div class="screen" id="screen-puzzle2">
+  <div class="puzzle-number">Question Two</div>
+  <div class="puzzle-prompt">Think about who you were three years ago.</div>
+  <div class="divider"></div>
+  <p class="puzzle-context" id="puzzle2-context"></p>
+  <div class="p2-question-label">Which is closer to how you feel?</div>
+  <div class="options">
+    <button class="option-btn" onclick="selectP2('chapters')">
+      <span class="option-letter">A.</span> Chapters. I'm the same person in different situations.
+    </button>
+    <button class="option-btn" onclick="selectP2('lives')">
+      <span class="option-letter">B.</span> Different lives. I've been several people already.
+    </button>
+  </div>
+</div>
+
+<!-- GATE 2 -->
+<div class="screen" id="screen-gate2">
+  <div class="waiting-icon">&#9679;</div>
+  <div class="gate">
+    <div class="gate-message">Almost there.</div>
+    <div class="gate-sub">Wait for the facilitator to give you the code for your task.</div>
+    <div class="gate-input-row">
+      <input type="text" class="gate-input" id="gate2-input" placeholder="code" autocomplete="off" onkeydown="if(event.key==='Enter')checkGate(2)">
+      <button class="gate-btn" onclick="checkGate(2)">Go</button>
+    </div>
+  </div>
+</div>
+
+<!-- TASK -->
+<div class="screen" id="screen-task">
+  <div class="task-label">Your Task</div>
+  <div class="task-text" id="task-text"></div>
+  <div class="task-rule">
+    When you present: first explain who is your leader and why you chose them. Then tell the room about your artifact and why you built it this way. Do NOT reveal your answers. The other groups will try to guess.
+  </div>
+  <button class="btn-feedback-link" onclick="goTo('screen-feedback')">Give feedback</button>
+</div>
+
+<!-- FEEDBACK -->
+<div class="screen" id="screen-feedback">
+  <div class="puzzle-number">Feedback</div>
+  <div class="puzzle-prompt">How was it?</div>
+  <div class="divider"></div>
+
+  <div class="feedback-form" id="feedback-form">
+    <div class="feedback-question">How would you rate this workshop?</div>
+    <div class="feedback-stars" id="stars-overall">
+      <button class="star-btn" onclick="setStars('overall',1)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('overall',2)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('overall',3)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('overall',4)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('overall',5)">&#9733;</button>
+    </div>
+
+    <div class="feedback-question">How interesting were the questions?</div>
+    <div class="feedback-stars" id="stars-questions">
+      <button class="star-btn" onclick="setStars('questions',1)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('questions',2)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('questions',3)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('questions',4)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('questions',5)">&#9733;</button>
+    </div>
+
+    <div class="feedback-question">How was the building task?</div>
+    <div class="feedback-stars" id="stars-task">
+      <button class="star-btn" onclick="setStars('task',1)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('task',2)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('task',3)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('task',4)">&#9733;</button>
+      <button class="star-btn" onclick="setStars('task',5)">&#9733;</button>
+    </div>
+
+    <div class="feedback-question">Anything you want to tell us?</div>
+    <textarea class="feedback-textarea" id="feedback-text" placeholder="Optional: your thoughts, suggestions, reactions..."></textarea>
+
+    <div class="feedback-error" id="feedback-error">Something went wrong. Your feedback was not sent.</div>
+
+    <button class="btn-start" id="feedback-submit" onclick="submitFeedback()">Send feedback</button>
+  </div>
+
+  <div class="feedback-sent" id="feedback-sent">
+    <div class="feedback-check">&#10003;</div>
+    <div class="feedback-thanks">Thank you!</div>
+    <p class="puzzle-context">Your feedback helps us make this better.</p>
+  </div>
+</div>
+
+<a class="reset-link" onclick="resetAll()">restart</a>
+
+<script>
+var p1Answer = null;
+var p2Answer = null;
+
+var GATE1_CODE = 'imagine';
+var GATE2_CODE = 'life';
+
+// ===== GOOGLE SHEETS SETUP =====
+// 1. Create a Google Sheet
+// 2. Go to Extensions > Apps Script
+// 3. Paste the script from google_apps_script.js
+// 4. Deploy as web app (Execute as: Me, Access: Anyone)
+// 5. Paste the deployment URL below:
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbxY8d9oBC9OT3JiLQDlSdaHQ_D78oOi52FeF12ehllJCrU6iPizwsU-UKsa-vedvci7/exec';
+// ================================
+
+var feedbackData = { overall: 0, questions: 0, task: 0 };
+
+var puzzle2Contexts = {
+  visual: "Picture yourself back then. What did you look like? What were you wearing on a typical day? Can you see yourself in a place you used to spend time in?<br><br>Was that person you? Or someone you used to know?",
+  kinesthetic: "Feel yourself back then. How did your body feel waking up in the morning? What did it feel like to walk into the place you spent most of your time?<br><br>Was that person you? Or someone you used to know?",
+  verbal: "Hear yourself back then. What did your inner voice sound like? What were the sentences you kept repeating to yourself? What did you talk about most?<br><br>Was that person you? Or someone you used to know?",
+  conceptual: "Think about yourself back then. What did you believe? What mattered to you? What were you sure about that you are no longer sure about now?<br><br>Was that person you? Or someone you used to know?"
+};
+
+var tasks = {
+  visual_chapters: "Build a self-portrait that contains your past, present, and future at once. Not three separate parts. One object where the three flow into each other so that no one can tell where one moment ends and another begins.",
+  visual_lives: "Build the door between two of your lives. Not a portrait of the person before or the person after. The threshold itself. The moment where one person's world ended and another person's world appeared.",
+  kinesthetic_chapters: "Build an object that feels like \"you\" when you hold it. Not what you look like. What you feel like. It must feel the same way you felt five years ago and the same way you will feel five years from now. When you present, let someone from another group hold it and describe what they feel.",
+  kinesthetic_lives: "Build two objects that fit in your hands. One belongs to someone you used to be. One belongs to who you are now. They must feel completely different to hold. When you present, pass them around without explaining which is which. Let the room guess.",
+  verbal_chapters: "Build one sentence about yourself as a physical object. Each word is a separate piece. The sentence must be something that has been true about you for as long as you can remember. When you present, read the sentence by pointing at each piece.",
+  verbal_lives: "Build two voices as two objects. They are two versions of you that disagree about something important. Place them facing each other. When you present, give each object one line of dialogue. Let the room hear the argument.",
+  conceptual_chapters: "Something about you has never changed, but nobody can see it. Build it. Make the invisible visible. When you present, show the object but do NOT say what it represents. Let the room figure it out.",
+  conceptual_lives: "Build the proof that you exist right now. Not yesterday's you, not tomorrow's you. The one sitting here in this room. No biography, no backstory. Only evidence that this version of you is real, right now."
+};
+
+function goTo(screenId) {
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  var screen = document.getElementById(screenId);
+  void screen.offsetWidth;
+  screen.classList.add('active');
+  var steps = { 'screen-landing': 0, 'screen-puzzle1': 15, 'screen-gate1': 30, 'screen-puzzle2': 45, 'screen-gate2': 60, 'screen-task': 75, 'screen-feedback': 100 };
+  document.getElementById('progress').style.width = (steps[screenId] || 0) + '%';
+}
+
+function selectP1(answer) {
+  p1Answer = answer;
+  document.getElementById('puzzle2-context').innerHTML = puzzle2Contexts[answer];
+  goTo('screen-gate1');
+  setTimeout(function() { document.getElementById('gate1-input').focus(); }, 600);
+}
+
+function selectP2(answer) {
+  p2Answer = answer;
+  document.getElementById('task-text').textContent = tasks[p1Answer + '_' + p2Answer];
+  goTo('screen-gate2');
+  setTimeout(function() { document.getElementById('gate2-input').focus(); }, 600);
+}
+
+function checkGate(n) {
+  var input = document.getElementById('gate' + n + '-input');
+  var code = input.value.trim().toLowerCase();
+  var correct = n === 1 ? GATE1_CODE : GATE2_CODE;
+  if (code === correct) {
+    input.classList.remove('error');
+    goTo(n === 1 ? 'screen-puzzle2' : 'screen-task');
+  } else {
+    input.classList.add('error');
+    setTimeout(function() { input.classList.remove('error'); }, 400);
+    input.value = '';
+    input.focus();
+  }
+}
+
+function setStars(category, value) {
+  feedbackData[category] = value;
+  var container = document.getElementById('stars-' + category);
+  var buttons = container.querySelectorAll('.star-btn');
+  buttons.forEach(function(btn, i) {
+    btn.classList.toggle('active', i < value);
+  });
+}
+
+function submitFeedback() {
+  var btn = document.getElementById('feedback-submit');
+  var errorEl = document.getElementById('feedback-error');
+  errorEl.classList.remove('active');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  var text = document.getElementById('feedback-text').value.trim();
+
+  var payload = {
+    timestamp: new Date().toISOString(),
+    puzzle1: p1Answer,
+    puzzle2: p2Answer,
+    rating_overall: feedbackData.overall,
+    rating_questions: feedbackData.questions,
+    rating_task: feedbackData.task,
+    comments: text
+  };
+
+  fetch(SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(function() {
+    document.getElementById('feedback-form').style.display = 'none';
+    document.getElementById('feedback-sent').classList.add('active');
+  })
+  .catch(function(err) {
+    console.error('Feedback error:', err);
+    errorEl.classList.add('active');
+    btn.disabled = false;
+    btn.textContent = 'Try again';
+  });
+}
+
+function resetAll() {
+  p1Answer = null;
+  p2Answer = null;
+  feedbackData.overall = 0;
+  feedbackData.questions = 0;
+  feedbackData.task = 0;
+  document.getElementById('gate1-input').value = '';
+  document.getElementById('gate2-input').value = '';
+  document.getElementById('feedback-text').value = '';
+  document.getElementById('feedback-form').style.display = '';
+  document.getElementById('feedback-sent').classList.remove('active');
+  document.getElementById('feedback-error').classList.remove('active');
+  var btn = document.getElementById('feedback-submit');
+  btn.disabled = false;
+  btn.textContent = 'Send feedback';
+  document.querySelectorAll('.star-btn').forEach(function(b) { b.classList.remove('active'); });
+  goTo('screen-landing');
+}
+</script>
+</body>
+</html>
