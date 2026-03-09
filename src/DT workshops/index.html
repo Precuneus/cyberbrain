@@ -626,7 +626,17 @@ function submitFeedback() {
 
   var text = document.getElementById('feedback-text').value.trim();
 
-  var payload = {
+  var iframe = document.createElement('iframe');
+  iframe.name = 'feedback-frame';
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = SHEET_URL;
+  form.target = 'feedback-frame';
+
+  var fields = {
     timestamp: new Date().toISOString(),
     puzzle1: p1Answer,
     puzzle2: p2Answer,
@@ -636,22 +646,23 @@ function submitFeedback() {
     comments: text
   };
 
-  fetch(SHEET_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  })
-  .then(function() {
+  for (var key in fields) {
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key;
+    input.value = fields[key];
+    form.appendChild(input);
+  }
+
+  document.body.appendChild(form);
+  form.submit();
+
+  setTimeout(function() {
     document.getElementById('feedback-form').style.display = 'none';
     document.getElementById('feedback-sent').classList.add('active');
-  })
-  .catch(function(err) {
-    console.error('Feedback error:', err);
-    errorEl.classList.add('active');
-    btn.disabled = false;
-    btn.textContent = 'Try again';
-  });
+    form.remove();
+    iframe.remove();
+  }, 1500);
 }
 
 function resetAll() {
